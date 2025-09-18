@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title> Transporte UMB</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1><img src="C:\Users\amell\OneDrive\Escritorio\logo.jpg" width="100px"> Transporte UMB</h1>
+    <p>Tu boleto digital para un viaje seguro</p>
+    <p></p>
+    <div class="user-info">
+      <span>Bienvenido, <strong>Estudiante</strong></span>
+      <a href="LOGIN.HTML" class="logout-button"> Cerrar Sesión</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="acciones">
+      <button onclick="generarQR()">🎟 Generar QR</button>
+    </div>
+    <section id="qr" style="display:none;">
+  <div class="contenido">
+    <h1>Escanea el QR</h1>
+    <div class="formulario">
+  <input type="text" id="urlInput" class="qr-input" placeholder="Ingresa la URL aquí" style="display:none;">
+      <button class="generar-btn">Generar QR</button>
+    </div>
+    <div class="qr-code"></div>
+  <div id="qr-url" style="margin-top:10px; font-size:0.95rem; color:#002b5c; display:none;"></div>
+  </div>
+</section>
+
+    <div class="msg" id="mensaje"></div>
+
+    <section class="historial">
+      <h2> Historial de viajes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Estatus</th>
+          </tr>
+        </thead>
+        <tbody id="historial"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 UMB Hackathon - Equipo Alianza JAFAZ</p>
+  </footer>
+
+  <!-- Librería QR -->
+
+  <script>
+  function generarQR() {
+    document.getElementById("qr").style.display = "block";
+
+    const input = document.getElementById("urlInput");
+    const contenedorQR = document.querySelector(".qr-code");
+    const etiquetaUrl = document.getElementById("qr-url");
+
+    document.querySelector(".generar-btn").addEventListener("click", async () => {
+      contenedorQR.innerHTML = ""; // Limpiar QR anterior
+      etiquetaUrl.textContent = "";
+
+      let qrText = input.value;
+      if (!qrText) {
+        // Si el input está vacío, obtener el valor del endpoint
+        try {
+          const res = await fetch('http://localhost:3000/redirect');
+          const data = await res.json();
+          qrText = data.redirect || "No disponible";
+        } catch (e) {
+          qrText = "No disponible";
+        }
+      }
+
+      new QRCode(contenedorQR, {
+        text: qrText,
+        width: 200,
+        height: 200,
+      });
+      etiquetaUrl.textContent = qrText !== "No disponible" ? URL generado: ${qrText} : "No se pudo obtener el URL";
+    });
+  }
+</script>
+</body>
+
+</html>

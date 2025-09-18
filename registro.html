@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro - Transporte UMB</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-bg">
+  <div class="login-container">
+    <h1> Transporte UMB</h1>
+    <p class="subtitle">Crea tu cuenta</p>
+
+    <form onsubmit="return registrar(event)">
+      <input type="text" id="nuevoUsuario" placeholder="Usuario" required>
+      <input type="email" id="correo" placeholder="Correo electrónico" required>
+      <input type="password" id="nuevoPassword" placeholder="Contraseña" required>
+      <select id="rol" required>
+        <option value="">Selecciona tu rol</option>
+        <option value="estudiante">Estudiante</option>
+        <option value="chofer">Chofer</option>
+      </select>
+      <button type="submit">Registrarse</button>
+    </form>
+
+    <p class="nota">¿Ya tienes cuenta? <a href="LOGIN.HTML">Inicia sesión</a></p>
+    <div id="mensaje"></div>
+  </div>
+
+  <script>
+    function registrar(e) {
+      e.preventDefault();
+      const user = document.getElementById("nuevoUsuario").value;
+      const email = document.getElementById("correo").value;
+      const pass = document.getElementById("nuevoPassword").value;
+      const rol = document.getElementById("rol").value;
+
+      //  Aquí tu equipo conecta con la API (guardar usuario en backend)
+      document.getElementById("mensaje").textContent =
+        " Usuario registrado: " + user + " (" + rol + ")";
+    }
+  </script>
+</body>
+</html>

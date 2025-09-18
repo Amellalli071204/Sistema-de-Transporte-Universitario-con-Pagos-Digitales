@@ -58,6 +58,16 @@
   <!-- Librería QR -->
 
   <script>
+  function agregarHistorial(monto) {
+    const fecha = new Date().toLocaleString();
+    const fila = `<tr>
+      <td>${fecha}</td>
+      <td>$${monto}</td>
+      <td class="ok">Disponible por 15 mn</td>
+    </tr>`;
+    document.getElementById("historial").innerHTML += fila;
+  }
+
   function generarQR() {
     document.getElementById("qr").style.display = "block";
 
@@ -86,7 +96,9 @@
         width: 200,
         height: 200,
       });
-      etiquetaUrl.textContent = qrText !== "No disponible" ? URL generado: ${qrText} : "No se pudo obtener el URL";
+      // Agregar al historial con monto fijo (puedes cambiar el valor si lo necesitas)
+      agregarHistorial(10);
+      //etiquetaUrl.textContent = qrText !== "No disponible" ? URL generado: ${qrText} : "No se pudo obtener el URL";
     });
   }
 </script>

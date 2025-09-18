@@ -30,7 +30,7 @@ o	Confirmar el registro.
 •	El QR no se genera: Revisa tu conexión a Internet y vuelve a intentarlo.
 •	El QR no se escanea en la unidad: Solicita la regeneración del código en la app.
 •	Olvidé mi contraseña: Usa la opción “Recuperar contraseña” en la página de inicio.
-
+------------------------------------------------------------------------------------------------------------------------------------------
 User Manual – QR Transportation System
 1. Introduction
 The QR transportation system allows users to register, log in, and generate a unique QR code that works as a digital ticket. This code is scanned when boarding the transport, and the payment is automatically processed through Open Payments and Interledger APIs.
